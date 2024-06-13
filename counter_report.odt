@@ -1,0 +1,25 @@
+﻿UP-DOWN COUNTER UVM Project
+
+
+
+
+
+Checks: All checks passed in all 9 tests.
+
+Functional coverage: 100%
+
+Code coverage : 100% achieved with 2 FEC condition don’t get hit(1 in each DUT).
+Reason : FEC Condition: 
+           else if((Enable_2 == 1) && (UpDown_2 == 0)) is masked by its upper else if condition ((Enable_2 == 1) && (UpDown_2 == 1))
+
+where (UpDown_2 == 0) never become false because if it become FALSE then (UpDown_2 == 1) become TRUE. 
+So, we can say that this never going to happen in else if conditions.
+It can be excluded.
+
+Bugs (Observation):
+1. there are no merge signals → Load,UpDown,Enable,In_data,Out_Data
+2. Reset is active High signal (In the requirement it shows active low)
+3. Design does not wait for 20ns to complete and then output goes zero,, but instead design accept reset pulse width between 11 to 19 and , accept reset and output immediately goes zero, it does not wait for reset pulse to finish , means >=  11 pulse width and output goes to zero.
+
+
+
